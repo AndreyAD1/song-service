@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    command: "bash ./scripts/runlocal.sh"
+    volumes:
+      - .:/usr/bin/app
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - VERBOSE_FLASK=true
+    networks:
+      - custom
+
+networks:
+  custom:
+    driver: bridge
