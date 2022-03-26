@@ -1,10 +1,13 @@
+import json
 import logging
 
 from app import app
+from app.models import Song
 
 logger = logging.getLogger(__file__)
 
 
-@app.route("/ping")
-def ping():
-    return "<p>Ping</p>"
+@app.route("/api/v1/songs", methods=["GET"])
+def get_songs():
+    songs = [song.dump() for song in Song.find()]
+    return json.dumps(songs)

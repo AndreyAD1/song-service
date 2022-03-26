@@ -12,3 +12,5 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 
 COPY . .
+
+ENV FLASK_APP=application.py

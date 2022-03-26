@@ -5,12 +5,13 @@ services:
       - songs_db
     command: "bash ./scripts/runlocal.sh"
     volumes:
-      - .:/usr/bin/app
+      - .:/usr/src/app
     environment:
       - HOST=0.0.0.0
       - PORT=8080
-      - VERBOSE_FLASK=true
       - MONGO_URI=mongodb://songs_db:27017
+      - VERBOSE_FLASK=true
+      - FLASK_ENV=development
     networks:
       - custom
 

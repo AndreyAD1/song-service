@@ -13,6 +13,6 @@ if app.config['VERBOSE']:
 
 client = pymongo.MongoClient(host=app.config["MONGO_URI"])
 db = client.songs
-db_songs = PyMongoInstance(db)
+song_db = PyMongoInstance(db)
 
 from app import song_list_api
