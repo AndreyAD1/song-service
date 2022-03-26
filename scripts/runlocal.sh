@@ -3,4 +3,4 @@
 set -xe
 
 echo 'LOADING SERVER'
-flask run --host "${HOST}" --port "${PORT}" --reload
+flask run --host "${HOST}" --port "${PORT}"
