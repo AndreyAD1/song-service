@@ -1,12 +1,12 @@
 from umongo import Document, fields
 
-from app import song_db
+from app.database import db_instance
 
 
-@song_db.register
+@db_instance.register
 class Song(Document):
     artist = fields.StrField()
-    title = fields.StrField()
+    title = fields.StrField(required=True)
     difficulty = fields.FloatField()
     level = fields.IntField()
     released = fields.DateField()
