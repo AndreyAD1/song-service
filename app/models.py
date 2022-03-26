@@ -7,6 +7,6 @@ from app import song_db
 class Song(Document):
     artist = fields.StrField()
     title = fields.StrField()
-    difficulty = fields.IntField()
+    difficulty = fields.FloatField()
     level = fields.IntField()
     released = fields.DateField()
