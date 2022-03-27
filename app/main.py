@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask, g
+from flask import Flask
 
 from app.database import db
 from app.config import Config
@@ -15,5 +15,6 @@ def get_application():
     db.instance.set_db(db.get_pymongo_database(application))
 
     with application.app_context():
-        from app import song_list_api
+        from app.song_list_api import api
+        application.register_blueprint(api)
         return application

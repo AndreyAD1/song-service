@@ -7,14 +7,8 @@ from app.main import get_application
 @pytest.fixture()
 def app():
     app = get_application()
-    app.config.update({
-        "TESTING": True,
-    })
-
-    # other setup can go here
-
+    app.config.update({"TESTING": True})
     yield app
-
     db.client.drop_database(db.db_name)
 
 

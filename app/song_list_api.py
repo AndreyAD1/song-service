@@ -1,20 +1,22 @@
 import logging
 
-from flask import jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app
 from umongo import ValidationError
 
 from app.models import Song
 
 logger = logging.getLogger(__file__)
 
+api = Blueprint("song_list_api", __name__, url_prefix="/api/v1")
 
-@current_app.route("/api/v1/song", methods=["GET"])
+
+@api.route("/song", methods=["GET"])
 def get_songs():
     songs = [song.dump() for song in Song.find()]
     return jsonify(data=songs)
 
 
-@current_app.route("/api/v1/song", methods=["POST"])
+@api.route("/song", methods=["POST"])
 def add_song():
     request_data = request.get_json()
     try:
