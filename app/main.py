@@ -1,8 +1,8 @@
 import logging
 
-from flask import Flask
+from flask import Flask, g
 
-from app.database import db_instance, get_pymongo_database
+from app.database import db
 from app.config import Config
 
 
@@ -12,8 +12,7 @@ def get_application():
     if application.config['VERBOSE']:
         application.logger.setLevel(logging.DEBUG)
 
-    db = get_pymongo_database(application)
-    db_instance.set_db(db)
+    db.instance.set_db(db.get_pymongo_database(application))
 
     with application.app_context():
         from app import song_list_api

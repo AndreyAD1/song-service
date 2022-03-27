@@ -12,6 +12,7 @@ services:
       - MONGO_URI=mongodb://songs_db:27017
       - VERBOSE_FLASK=true
       - FLASK_ENV=development
+      - DB_NAME=songs
     networks:
       - custom
 

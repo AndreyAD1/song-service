@@ -1,9 +1,9 @@
 from umongo import Document, fields
 
-from app.database import db_instance
+from app.database import db
 
 
-@db_instance.register
+@db.instance.register
 class Song(Document):
     artist = fields.StrField()
     title = fields.StrField(required=True)
