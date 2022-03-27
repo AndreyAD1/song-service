@@ -3,7 +3,7 @@ import logging
 from flask import Flask
 
 from app.database import db_instance, get_pymongo_database
-from config import Config
+from app.config import Config
 
 
 def get_application():
@@ -18,6 +18,3 @@ def get_application():
     with application.app_context():
         from app import song_list_api
         return application
-
-
-app = get_application()

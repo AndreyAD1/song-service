@@ -13,4 +13,4 @@ RUN poetry install --no-interaction --no-ansi
 
 COPY . .
 
-ENV FLASK_APP=application.py
+ENV FLASK_APP=app.main:get_application()
