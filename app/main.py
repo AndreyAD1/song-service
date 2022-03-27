@@ -15,6 +15,6 @@ def get_application():
     db.instance.set_db(db.get_pymongo_database(application))
 
     with application.app_context():
-        from app.song_list_api import api
+        from app.api.song_list_api import api
         application.register_blueprint(api)
         return application

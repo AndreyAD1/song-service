@@ -14,8 +14,8 @@ def add_song(**kwargs):
     song_features = {
         "artist": faker.name(),
         "title": faker.word(),
-        "difficulty": round(uniform(0, 15), 2),
-        "level": randrange(15),
+        "difficulty": round(uniform(1, 15), 2),
+        "level": randrange(1, 15),
         "released": faker.date()
     }
     song = Song(**{**song_features, **kwargs})
