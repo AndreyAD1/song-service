@@ -13,9 +13,8 @@ class SongService:
     @staticmethod
     def get_average_difficulty():
         pipeline = [
-            {"$group": {"_id": "_id", "average": {"$avg": "$level"}}}
+            {"$group": {"_id": None, "average": {"$avg": "$level"}}}
         ]
-        # avg = db.db.command("aggregate", "songs", pipeline=pipeline, explain=True)
-        avg = db.db.songs.aggregate(pipeline)
-        current_app.logger.debug(f"Average difficulty: {list(avg)}")
-        return list(avg)
+        result = list(db.db_connection.song.aggregate(pipeline))
+        current_app.logger.debug(f"Average difficulty: {result}")
+        return result[0]["average"]
