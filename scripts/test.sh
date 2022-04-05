@@ -6,15 +6,14 @@ COMPOSE_FILE="docker-compose-dev.yml"
 CMD="docker-compose -f ${COMPOSE_FILE}"
 
 function docker_compose_down() {
-  if [[ $? -ne 0 ]]; then
-    ${CMD} logs app
-  fi
   ${CMD} down
   ${CMD} rm -f
 }
 
-docker_compose_down
 trap docker_compose_down EXIT
 
-${CMD} up -d --build
-${CMD} exec -T app pytest -v -W ignore:::marshmallow.fields
+${CMD} up -d --build --force-recreate
+if ! ${CMD} exec -T app pytest -v -W ignore:::marshmallow.fields
+then
+  ${CMD} logs app
+fi
