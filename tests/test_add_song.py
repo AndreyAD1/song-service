@@ -6,8 +6,20 @@ import pytest
     ("request_body", "expected_response"),
     [
         (
-            {"artist": "The Yousicians", "title": "Lycanthropic Metamorphosis", "difficulty": 14.6, "level": 13, "released": "2016-10-26"},
-            {"artist": "The Yousicians", "title": "Lycanthropic Metamorphosis", "difficulty": 14.6, "level": 13, "released": "2016-10-26"}
+            {
+                "artist": "The Yousicians",
+                "title": "Lycanthropic Metamorphosis",
+                "difficulty": 14.6,
+                "level": 13,
+                "released": "2016-10-26"
+            },
+            {
+                "artist": "The Yousicians",
+                "title": "Lycanthropic Metamorphosis",
+                "difficulty": 14.6,
+                "level": 13,
+                "released": "2016-10-26"
+            }
         ),
         (
             {"title": "Lycanthropic Metamorphosis"},

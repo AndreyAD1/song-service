@@ -26,7 +26,10 @@ def get_songs():
     except ValidationError as ex:
         return jsonify(errors=ex.messages), 400
 
-    songs = SongService().get_song_list(query_args["limit"], query_args["offset"])
+    songs = SongService().get_song_list(
+        query_args["limit"],
+        query_args["offset"]
+    )
     return jsonify(data=songs)
 
 
@@ -36,7 +39,8 @@ def add_song():
     try:
         song = Song(**request_data)
     except ValidationError as ex:
-        current_app.logger.debug(f"The invalid new song request: {request_data}")
+        error_message = f"The invalid new song request: {request_data}"
+        current_app.logger.debug(error_message)
         return jsonify(errors=ex.messages), 400
 
     song.commit()
