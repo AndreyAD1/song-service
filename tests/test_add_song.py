@@ -21,5 +21,9 @@ def test_add_song(request_body, expected_response, client):
     assert response.status_code == 200
     received_response = response.get_json()
     assert received_response["id"]
-    diff = DeepDiff(received_response, expected_response, exclude_paths="root['id']")
+    diff = DeepDiff(
+        received_response,
+        expected_response,
+        exclude_paths="root['id']"
+    )
     assert not diff.to_dict()

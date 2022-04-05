@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xe
+set -xeuo pipefail
 
 echo 'LOADING SERVER'
 flask run --host "${HOST}" --port "${PORT}"
