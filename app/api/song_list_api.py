@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, current_app
 from marshmallow import fields, Schema, validate
 from umongo import ValidationError
 
+from app.database import db
 from app.constants import DEFAULT_LIMIT
 from app.models import Song
 from app.services.song_service import SongService
@@ -26,7 +27,7 @@ def get_songs():
     except ValidationError as ex:
         return jsonify(errors=ex.messages), 400
 
-    songs = SongService().get_song_list(
+    songs = SongService(db).get_song_list(
         query_args["limit"],
         query_args["offset"]
     )
@@ -49,5 +50,5 @@ def add_song():
 
 @api.route("/song/difficulty", methods=["GET"])
 def get_average_difficulty():
-    average_difficulty = SongService.get_average_difficulty()
+    average_difficulty = SongService(db).get_average_difficulty()
     return jsonify(data=average_difficulty)

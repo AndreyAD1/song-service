@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "yousician-assignment"
+name = "music-assignment"
 version = "0.1.0"
 description = ""
 authors = ["Andrey Arakelyants"]
@@ -18,3 +18,8 @@ Faker = "^13.3.3"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+filterwarnings=[
+    "ignore:::marshmallow.fields"
+]

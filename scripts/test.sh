@@ -19,7 +19,7 @@ then
   ${CMD} logs app
 fi
 
-if ! ${CMD} exec -T app pytest -v -W ignore:::marshmallow.fields
+if ! ${CMD} exec -T app pytest -v
 then
   ${CMD} logs app
 fi
