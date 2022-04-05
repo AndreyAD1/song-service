@@ -13,7 +13,12 @@ function docker_compose_down() {
 trap docker_compose_down EXIT
 
 ${CMD} up -d --build --force-recreate
-${CMD} exec -T app flake8
+
+if ! ${CMD} exec -T app flake8
+then
+  ${CMD} logs app
+fi
+
 if ! ${CMD} exec -T app pytest -v -W ignore:::marshmallow.fields
 then
   ${CMD} logs app

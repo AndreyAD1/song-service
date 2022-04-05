@@ -12,7 +12,7 @@ def get_application():
     if application.config['VERBOSE']:
         application.logger.setLevel(logging.DEBUG)
 
-    db.instance.set_db(db.get_pymongo_database(application))
+    db.set_database(application)
 
     with application.app_context():
         from app.api.song_list_api import api

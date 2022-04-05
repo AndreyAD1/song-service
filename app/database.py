@@ -9,11 +9,11 @@ class Database:
         self.db_name = None
         self.db_connection = None
 
-    def get_pymongo_database(self, application):
+    def set_database(self, application):
         self.client = pymongo.MongoClient(host=application.config["MONGO_URI"])
         self.db_name = application.config["DB_NAME"]
         self.db_connection = self.client[self.db_name]
-        return self.db_connection
+        self.instance.set_db(self.db_connection)
 
 
 db = Database()
