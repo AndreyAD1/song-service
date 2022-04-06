@@ -16,6 +16,7 @@ class SongService:
         pipeline = [
             {"$group": {"_id": None, "average": {"$avg": "$difficulty"}}}
         ]
-        result = list(self.db.db_connection.song.aggregate(pipeline))
-        current_app.logger.debug(f"Average difficulty: {result}")
-        return result[0]["average"]
+        song_collection = self.db.db_connection[Song.opts.collection_name]
+        query_result = list(song_collection.aggregate(pipeline))
+        current_app.logger.debug(f"Average difficulty: {query_result}")
+        return query_result[0]["average"]
