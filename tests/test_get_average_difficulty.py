@@ -20,6 +20,6 @@ def test_get_average_difficulty(client, difficulties, expected_avg_difficulty):
     for difficulty in difficulties:
         add_song(difficulty=difficulty)
 
-    response = client.get("/api/v1/song/difficulty")
+    response = client.get("/api/v1/difficulty")
     response_body = response.get_json()["data"]
     assert response_body["average_difficulty"] == expected_avg_difficulty

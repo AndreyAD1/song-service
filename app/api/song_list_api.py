@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, current_app
-from marshmallow import fields, Schema, validate
-from umongo import ValidationError
+from marshmallow import fields, Schema, validate, ValidationError
+from umongo import ValidationError as UmongoValidationError
 
 from app.database import db
 from app.constants import DEFAULT_LIMIT
@@ -39,16 +39,10 @@ def add_song():
     request_data = request.get_json()
     try:
         song = Song(**request_data)
-    except ValidationError as ex:
+    except UmongoValidationError as ex:
         error_message = f"The invalid new song request: {request_data}"
         current_app.logger.debug(error_message)
         return jsonify(errors=ex.messages), 400
 
     song.commit()
     return jsonify(data=song.dump())
-
-
-@api.route("/song/difficulty", methods=["GET"])
-def get_average_difficulty():
-    average_difficulty = SongService(db).get_average_difficulty()
-    return jsonify(data={"average_difficulty": average_difficulty})
