@@ -81,4 +81,3 @@ def test_get_songs_error(client, limit, offset):
     query_params = {"limit": limit, "offset": offset}
     response = client.get("/api/v1/song", query_string=query_params)
     assert response.status_code == 400
-    print(response.data.decode())

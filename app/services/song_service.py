@@ -19,4 +19,7 @@ class SongService:
         song_collection = self.db.db_connection[Song.opts.collection_name]
         query_result = list(song_collection.aggregate(pipeline))
         current_app.logger.debug(f"Average difficulty: {query_result}")
-        return query_result[0]["average"]
+        average = None
+        if query_result:
+            average = query_result[0]["average"]
+        return average

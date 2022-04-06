@@ -32,9 +32,9 @@ def test_add_song(request_body, expected_response, client):
     response = client.post("/api/v1/song", json=request_body)
     assert response.status_code == 200
     received_response = response.get_json()
-    assert received_response["id"]
+    assert received_response["data"]["id"]
     diff = DeepDiff(
-        received_response,
+        received_response["data"],
         expected_response,
         exclude_paths="root['id']"
     )

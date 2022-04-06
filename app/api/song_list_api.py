@@ -45,10 +45,10 @@ def add_song():
         return jsonify(errors=ex.messages), 400
 
     song.commit()
-    return jsonify(song.dump())
+    return jsonify(data=song.dump())
 
 
 @api.route("/song/difficulty", methods=["GET"])
 def get_average_difficulty():
     average_difficulty = SongService(db).get_average_difficulty()
-    return jsonify(data=average_difficulty)
+    return jsonify(data={"average_difficulty": average_difficulty})
