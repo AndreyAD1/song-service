@@ -18,6 +18,10 @@ class GetSongSchema(Schema):
     offset = fields.Int(as_string=True)
 
 
+class SearchSongSchema(Schema):
+    message = fields.String()
+
+
 @api.route("/song", methods=["GET"])
 def get_songs():
     limit = request.args.get("limit", DEFAULT_LIMIT)
@@ -46,3 +50,16 @@ def add_song():
 
     song.commit()
     return jsonify(data=song.dump())
+
+
+@api.route("/song/search", methods=["GET"])
+def search_songs():
+    message = request.args.get("message")
+    try:
+        query_args = SearchSongSchema().load({"message": message})
+    except ValidationError as ex:
+        return jsonify(errors=ex.messages), 400
+
+    service = SongService(db)
+    songs = service.search_song(query_args["message"])
+    return jsonify(data=songs)
